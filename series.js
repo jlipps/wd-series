@@ -20,7 +20,11 @@ var boundSeries = function(scope, fns, finalCb) {
         scope.next = args[0];
       }
       scope.convertElements();
-      fn.apply(scope);
+      try {
+        fn.apply(scope);
+      } catch (e) {
+        scope.next(e);
+      }
     };
     modFns.push(modFn);
   });

@@ -64,7 +64,8 @@ DriverScope.prototype.getProxiedElement = function(el) {
 DriverScope.prototype.convertElements = function() {
   var me = this;
   var checkPossibleEl = function(possibleEl) {
-    if (possibleEl !== null && possibleEl.value && possibleEl.browser) {
+    if (typeof possibleEl !== "undefined" && possibleEl !== null &&
+        possibleEl.value && possibleEl.browser) {
       return me.getProxiedElement(possibleEl);
     }
     return possibleEl;
