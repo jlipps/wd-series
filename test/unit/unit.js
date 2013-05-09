@@ -34,11 +34,30 @@ describe("Series", function() {
   });
 });
 
-describe("Series binding", function() {
+describe("Driver binding", function() {
+
+  // monkey-patch driver
+  driver.elementById = function(id, cb) {
+    var getName = function(cb2) {
+      cb2(null, "monkeyPatchedElementName");
+    };
+    cb(null, {value: 1, browser: driver, getName: getName});
+  };
 
   it('should proxy methods from driver', function(done) {
     driverSeries(driver, [
       function() { (typeof this.init).should.equal("function"); this.next(); }
+    ], done);
+  });
+
+  it('should proxy methods from elements', function(done) {
+    driverSeries(driver, [
+      function() { this.elementById('foo'); },
+      function() {
+        (typeof this.res.getName).should.equal("function");
+        this.res.getName();
+      },
+      function() { this.res.should.equal("monkeyPatchedElementName"); this.next(); }
     ], done);
   });
 });
