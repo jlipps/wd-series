@@ -1,11 +1,10 @@
 "use strict";
 
 var _ = require("underscore")
-  , DriverScope = require("./driver_scope")
   , async = require("async");
 
 
-var boundSeries = function(scope, fns, finalCb) {
+module.exports = function(scope, fns, finalCb) {
   var modFns = [];
   _.each(fns, function(fn) {
     var modFn = function() {
@@ -30,12 +29,3 @@ var boundSeries = function(scope, fns, finalCb) {
   });
   return async.waterfall(modFns, finalCb);
 };
-
-module.exports.boundSeries = boundSeries;
-
-module.exports.driverSeries = function(driver, fns, finalCb) {
-  var scope = new DriverScope(driver);
-  return boundSeries(scope, fns, finalCb);
-};
-
-

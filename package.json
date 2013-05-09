@@ -18,7 +18,7 @@
   "engines": [
     "node"
   ],
-  "main": "series.js",
+  "main": "main.js",
   "dependencies": {
     "underscore": "~1.4.4",
     "async": "~0.2.8"

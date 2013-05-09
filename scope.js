@@ -1,6 +1,6 @@
 "use strict";
 
-var boundSeries = require('./series').boundSeries;
+var boundSeries = require('./series.js');
 
 var SeriesScope = function(scopeObj) {
   this.init(scopeObj);

@@ -4,7 +4,7 @@
 var should = require('should')
   , wd = require('wd')
   , driver = wd.remote()
-  , driverSeries = require('../../series').driverSeries;
+  , driverSeries = require('../../main');
 
 describe("Series", function() {
   it('should make this.next() available', function(done) {
@@ -35,6 +35,27 @@ describe("Series", function() {
 });
 
 describe("Control flow", function() {
+
+  it('should be able to pause execution', function(done) {
+    driverSeries(driver, [
+      function() { this.startTime = Date.now(); this.next(); },
+      function() { this.sleep(1); },
+      function() { (Date.now() - 1000).should.be.above(this.startTime); this.next(); }
+    ], done);
+  });
+
+  it('should be able to retry a block', function(done) {
+    var startTime = Date.now();
+    driverSeries(driver, [
+      function() { this.retry(2, [
+        function() { this.next(); }
+      ]); }
+    ], function(err) {
+      should.exist(err);
+      (Date.now() - 2000).should.be.above(startTime);
+      done();
+    });
+  });
 });
 
 describe("Driver binding", function() {
