@@ -1,0 +1,36 @@
+{
+  "name": "wd-series",
+  "description": "Async wrapper for wd.js",
+  "tags": [
+    "selenium",
+    "webdriver",
+    "async"
+  ],
+  "version": "0.0.1",
+  "author": "http://github.com/jlipps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlipps/wd-series.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jlipps/wd-series/issues"
+  },
+  "engines": [
+    "node"
+  ],
+  "main": "series.js",
+  "dependencies": {
+    "underscore": "~1.4.4",
+    "async": "~0.2.8"
+  },
+  "scripts": {
+    "test": "grunt lint"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.6",
+    "grunt-contrib-jshint": "~0.1.1"
+  }
+}
+
+
