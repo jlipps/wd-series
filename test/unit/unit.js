@@ -56,6 +56,36 @@ describe("Control flow", function() {
       done();
     });
   });
+
+  it('should be able to execute a conditional blocks with true protasis', function(done) {
+    var myVal = "foo";
+    driverSeries(driver, [
+      function() { this.iff([
+        function() { this.next(); }
+      ], [
+        function() { myVal = "bar"; this.next(); }
+      ]); }
+    ], function(err) {
+      should.not.exist(err);
+      myVal.should.equal("bar");
+      done();
+    });
+  });
+
+  it('should be able to execute a conditional blocks with true apodosis', function(done) {
+    var myVal = "foo";
+    driverSeries(driver, [
+      function() { this.iff([
+        function() { this.next(new Error("asdf")); }
+      ], [
+        function() { myVal = "bar"; this.next(); }
+      ]); }
+    ], function(err) {
+      should.not.exist(err);
+      myVal.should.equal("foo");
+      done();
+    });
+  });
 });
 
 describe("Driver binding", function() {
