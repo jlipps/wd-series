@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     }
     , mochaTestConfig: {
       options: {
-        timeout: 60000,
+        timeout: 6000,
         reporter: 'spec'
       }
     }

@@ -4,7 +4,7 @@
 var should = require('should')
   , wd = require('wd')
   , driver = wd.remote()
-  , driverSeries = require('../../main');
+  , driverSeries = require('../../lib/main');
 
 describe("Series", function() {
   it('should make this.next() available', function(done) {
@@ -83,6 +83,17 @@ describe("Control flow", function() {
     ], function(err) {
       should.not.exist(err);
       myVal.should.equal("foo");
+      done();
+    });
+  });
+
+  it('should be able to honey-badger through a broken series', function(done) {
+    driverSeries(driver, [
+      function() { this.honeyBadger([
+        function() { this.next(new Error("oh noes!")); }
+      ]); }
+    ], function(err) {
+      should.not.exist(err);
       done();
     });
   });
