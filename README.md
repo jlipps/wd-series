@@ -81,6 +81,7 @@ driverSeries driver, [
     -> @get "http://mysite.com"
     -> @elementById "someId"
     -> @res.click()
+    -> @elementById "anotherThing"
     -> @res.text()
     -> @res.should.equal "What the text should be"; @next
     -> @quit()
