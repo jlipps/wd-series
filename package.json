@@ -19,7 +19,7 @@
     "node"
   ],
   "directories": {
-    "lib": "./lib",
+    "lib": "./lib"
   },
   "main": "./lib/main.js",
   "dependencies": {
